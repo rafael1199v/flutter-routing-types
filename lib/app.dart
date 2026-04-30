@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_routing_types/features/welcome/presentation/pages/welcome.page.dart';
+import 'features/welcome/presentation/pages/welcome.page.dart';
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
