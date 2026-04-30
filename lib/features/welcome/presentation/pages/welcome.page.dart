@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_routing_types/features/registration/presentation/pages/registration.page.dart';
 
 class WelcomePage extends StatefulWidget {
+  static const String routeName = '/welcome';
   const WelcomePage({super.key});
 
   @override
@@ -9,7 +11,7 @@ class WelcomePage extends StatefulWidget {
 
 class _WelcomePageState extends State<WelcomePage> {
   late PageController _pageViewController;
-  int _paginaActual = 0;
+  int currentPage = 0;
 
   @override
   void initState() {
@@ -24,9 +26,9 @@ class _WelcomePageState extends State<WelcomePage> {
   }
 
   void goToNextPage() {
-    if (_paginaActual < 2) {
+    if (currentPage < 2) {
       _pageViewController.animateToPage(
-        _paginaActual + 1,
+        currentPage + 1,
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
@@ -42,13 +44,10 @@ class _WelcomePageState extends State<WelcomePage> {
             controller: _pageViewController,
             onPageChanged: (index) => {
               setState(() {
-                _paginaActual = index;
+                currentPage = index;
               }),
             },
             children: [
-              // Image.assets("assets/images/photo1.jpeg", fit: BoxFit.cover),
-              // Image.assets("assets/images/photo2.jpeg", fit: BoxFit.cover),
-              // Image.assets("assets/images/photo3.jpeg", fit: BoxFit.cover)
               Image.asset("assets/images/welcome1.jpg", fit: BoxFit.cover),
               Image.asset("assets/images/welcome2.jpg", fit: BoxFit.cover),
               Image.asset("assets/images/welcome3.jpg", fit: BoxFit.cover),
@@ -67,13 +66,14 @@ class _WelcomePageState extends State<WelcomePage> {
                 backgroundColor: Colors.white,
               ),
               onPressed: () {
-                if (_paginaActual == 2) {
+                if (currentPage == 2) {
+                  Navigator.pushNamed(context, RegistrationPage.routeName);
                 } else {
                   goToNextPage();
                 }
               },
               child: Text(
-                _paginaActual == 2 ? "Comenzar" : "Siguiente",
+                currentPage == 2 ? "Comenzar" : "Siguiente",
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
