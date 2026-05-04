@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_routing_types/core/constants/app_assets.dart';
 import 'package:flutter_routing_types/features/registration/presentation/pages/registration.page.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -48,9 +49,9 @@ class _WelcomePageState extends State<WelcomePage> {
               }),
             },
             children: [
-              Image.asset("assets/images/welcome1.jpg", fit: BoxFit.cover),
-              Image.asset("assets/images/welcome2.jpg", fit: BoxFit.cover),
-              Image.asset("assets/images/welcome3.jpg", fit: BoxFit.cover),
+              Image.asset(AppAssets.welcome1, fit: BoxFit.cover),
+              Image.asset(AppAssets.welcome2, fit: BoxFit.cover),
+              Image.asset(AppAssets.welcome3, fit: BoxFit.cover),
             ],
           ),
           Positioned(
