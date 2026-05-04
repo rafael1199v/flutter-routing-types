@@ -1,55 +1,26 @@
 import 'package:flutter/material.dart';
+import '../../domain/repository/music_repository.dart';
 
 class MusicSearchViewmodel extends ChangeNotifier {
-
-  final List<String> _allMusic = [
-    'The Beatles',
-    'Michael Jackson',
-    'Queen',
-    'Elvis Presley',
-    'Madonna',
-    'Elton John',
-    'Led Zeppelin',
-    'Pink Floyd',
-    'Nirvana',
-    'Metallica',
-    'AC/DC',
-    'Eminem',
-    'Tupac Shakur',
-    'Snoop Dogg',
-    'Dr. Dre',
-    'Beyoncé',
-    'Jay-Z',
-    'Taylor Swift',
-    'Ed Sheeran',
-    'Adele',
-    'Drake',
-    'The Weeknd',
-    'Bad Bunny',
-    'Shakira',
-    'Luis Miguel',
-    'Gustavo Cerati',
-    'Charly García',
-    'Spinetta',
-    'Soda Stereo',
-    'Los Prisioneros',
-    'Daft Punk',
-    'Coldplay',
-    'Arctic Monkeys',
-    'The Strokes',
-    'Radiohead',
-    'Gorillaz',
-    'Red Hot Chili Peppers',
-    'Foo Fighters',
-    'Muse',
-    'The Killers',
-  ];
+  final MusicRepository _repository;
 
   List<String> _filteredMusic = [];
+  List<String> _allMusic = [];
+  bool isLoading = false;
   List<String> get filteredMusic => _filteredMusic;
 
-  MusicSearchViewmodel() {
+  MusicSearchViewmodel({required MusicRepository musicRepository})
+    : _repository = musicRepository;
+
+  Future<void> loadMusic() async {
+    isLoading = true;
+    notifyListeners();
+
+    _allMusic = await _repository.getMusicList();
     _filteredMusic = _allMusic;
+
+    isLoading = false;
+    notifyListeners();
   }
 
   void filterMusic(String query) {
@@ -63,5 +34,4 @@ class MusicSearchViewmodel extends ChangeNotifier {
 
     notifyListeners();
   }
-  
 }
