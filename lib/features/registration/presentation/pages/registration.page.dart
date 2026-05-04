@@ -86,10 +86,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       onPressed: _navigateToSearch,
                       icon: const Icon(Icons.search),
                       label: const Text('Buscar mi música favorita'),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black,
-                        foregroundColor: Colors.white,
-                      ),
                     ),
                   ],
                 ),
@@ -101,8 +97,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 onPressed: _finishRegistration,
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 16),
-                  backgroundColor: Colors.black,
-                  foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
                   )

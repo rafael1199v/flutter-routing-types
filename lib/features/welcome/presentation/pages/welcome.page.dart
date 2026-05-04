@@ -64,6 +64,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   borderRadius: BorderRadius.circular(30),
                 ),
                 backgroundColor: Colors.white,
+                foregroundColor: Colors.black
               ),
               onPressed: () {
                 if (currentPage == 2) {
@@ -76,8 +77,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 currentPage == 2 ? "Comenzar" : "Siguiente",
                 style: TextStyle(
                   fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  fontWeight: FontWeight.bold
                 ),
               ),
             ),

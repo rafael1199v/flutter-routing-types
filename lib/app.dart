@@ -8,6 +8,14 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.black,
+            foregroundColor: Colors.white
+          )
+        )
+      ),
       debugShowCheckedModeBanner: false,
       initialRoute: WelcomePage.routeName,
       routes: {
