@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../infraestructure/data/local_music_repository.dart';
 import '../viewmodels/music_search_viewmodel.dart';
 
 class MusicSearchPage extends StatefulWidget {
@@ -10,11 +11,15 @@ class MusicSearchPage extends StatefulWidget {
 
 class _MusicSearchPageState extends State<MusicSearchPage> {
   late final MusicSearchViewmodel _musicSearchViewmodel;
-  
+
   @override
   void initState() {
     super.initState();
-    _musicSearchViewmodel = MusicSearchViewmodel();
+    _musicSearchViewmodel = MusicSearchViewmodel(
+      musicRepository: LocalMusicRepository(),
+    );
+
+    _musicSearchViewmodel.loadMusic();
   }
 
   @override
@@ -44,14 +49,20 @@ class _MusicSearchPageState extends State<MusicSearchPage> {
               ),
             ),
           ),
-          Expanded(
-            child: ListenableBuilder(
-              listenable: _musicSearchViewmodel,
-              builder: (context, _) {
-                return ListView.builder(
+
+          ListenableBuilder(
+            listenable: _musicSearchViewmodel,
+            builder: (context, _) {
+              if (_musicSearchViewmodel.isLoading) {
+                return Center(child: CircularProgressIndicator());
+              }
+
+              return Expanded(
+                child: ListView.builder(
                   itemCount: _musicSearchViewmodel.filteredMusic.length,
                   itemBuilder: (context, index) {
-                    final musicItem = _musicSearchViewmodel.filteredMusic[index];
+                    final musicItem =
+                        _musicSearchViewmodel.filteredMusic[index];
                     return ListTile(
                       leading: const Icon(Icons.music_note),
                       title: Text(musicItem),
@@ -60,9 +71,9 @@ class _MusicSearchPageState extends State<MusicSearchPage> {
                       },
                     );
                   },
-                );
-              }
-            )
+                ),
+              );
+            },
           ),
         ],
       ),
